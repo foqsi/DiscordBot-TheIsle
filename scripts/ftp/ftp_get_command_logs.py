@@ -3,6 +3,8 @@ import os
 import re
 import asyncio
 from dotenv import load_dotenv
+# TODO: Use this
+from .setup_ftp import ftp_download_file
 
 load_dotenv()
 
