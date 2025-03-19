@@ -9,6 +9,7 @@ from commands.account.check_pair import setup_check_pair
 from commands.admin.clear_channel_messages import setup_clear_command
 from commands.other.restarts import setup_restarts_command
 from commands.patreon.unlock_specie import setup_unlock_command
+from commands.admin.rcon_send_command import setup_rcon_command
 
 from scripts.ftp.ftp_get_command_logs import get_command_logs
 from scripts.rcon.rcon_manage_dino_roster import update_dino_roster
@@ -37,7 +38,7 @@ async def on_ready():
     bot.loop.create_task(update_dino_roster(bot))
 
     # Schedule the restart announcements
-    scheduler.add_job(send_restart_announcements, 'cron', hour=11, minute=20, timezone='America/Chicago')
+    scheduler.add_job(send_restart_announcements, 'cron', hour=11, minute=50, timezone='America/Chicago')
     scheduler.add_job(send_restart_announcements, 'cron', hour=22, minute=50, timezone='America/Chicago')
     
     scheduler.start()
@@ -48,5 +49,6 @@ setup_check_pair(bot)
 setup_clear_command(bot)
 setup_restarts_command(bot)
 setup_unlock_command(bot)
+# setup_rcon_command(bot)
 
 bot.run(os.getenv('DISCORD_TOKEN'))

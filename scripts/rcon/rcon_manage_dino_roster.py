@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 RCON_CLIENT = setup_rcon()
 
-DINO_LOG = int(os.getenv("MANAGE_DINO_LOG_CHANNEL_ID"))
+CHANNEL_ID = int(os.getenv("MANAGE_DINO_LOG_CHANNEL_ID"))
 
 DISCORD_HEADER = ("## ♻️ Automated Population Control Update\n\n"
                    "The following spawn changes were automatically applied to the game server. "
@@ -119,7 +119,7 @@ async def update_dino_roster(bot):
 async def notify_dino_changes(bot, dino_population):
     """Sends messages to Discord **only** if a specific dino was enabled or disabled."""
     global last_dino_state
-    channel = bot.get_channel(DINO_LOG)
+    channel = bot.get_channel(CHANNEL_ID)
     if not channel:
         return
 
@@ -177,7 +177,7 @@ async def disable_unlocked_dino(bot, dino_name):
         del TEMP_UNLOCKS[dino_name]  #  Remove from temp unlock list
 
     #  Ensure Discord channel is found before sending
-    channel = bot.get_channel(DINO_LOG)
+    channel = bot.get_channel(CHANNEL_ID)
     if channel:
         message = f"{DISCORD_HEADER}\n" + (f"> ❌ **{dino_name.upper()}** spawns have been **DISABLED**\n") + "\n=============================================="
         await channel.send(message)

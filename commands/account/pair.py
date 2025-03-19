@@ -11,7 +11,7 @@ from utils.discord.check_pairing_status import check_pairing_status
 
 load_dotenv()
 
-PAIR_LOG_CHANNEL_ID = os.getenv('PAIR_LOG_CHANNEL_ID')
+CHANNEL_ID = os.getenv('PAIR_LOG_CHANNEL_ID')
 
 def setup_pair_command(bot: commands.Bot):
     @bot.tree.command(name='pair', description='Link your Discord account with your SteamID.')
@@ -44,7 +44,7 @@ def setup_pair_command(bot: commands.Bot):
 
             # Insert the pair request into the database
             insert_pair = supabase.table('pairings').insert(data).execute()
-            await send_channel_message(bot, PAIR_LOG_CHANNEL_ID, f"**{discord_username}** {(discord_id)} attempt: **{pair_code}**")
+            await send_channel_message(bot, CHANNEL_ID, f"**{discord_username}** {(discord_id)} attempt: **{pair_code}**")
             
             if insert_pair.data:
                 await send_ephemeral_message(interaction, embed=embed)
