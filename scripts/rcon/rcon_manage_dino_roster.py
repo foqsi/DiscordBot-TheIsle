@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 RCON_CLIENT = setup_rcon()
 
-CHANNEL_ID = int(os.getenv("MANAGE_DINO_LOG_CHANNEL_ID"))
+CHANNEL_ID = int(os.getenv("PUBLIC_ALERTS"))
 
 DISCORD_HEADER = ("## ♻️ Automated Population Control Update\n\n"
                    "The following spawn changes were automatically applied to the game server. "

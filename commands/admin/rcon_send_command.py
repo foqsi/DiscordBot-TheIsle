@@ -10,7 +10,7 @@ from utils.discord.send_messages import send_ephemeral_message, send_channel_mes
 
 load_dotenv()
 
-CHANNEL_ID = int(os.getenv("MANAGE_DINO_LOG_CHANNEL_ID"))
+CHANNEL_ID = int(os.getenv("PUBLIC_ALERTS"))
 
 # Commands that require a message
 MESSAGE_REQUIRED_COMMANDS = {"announce", "directmessage", "ban"}
