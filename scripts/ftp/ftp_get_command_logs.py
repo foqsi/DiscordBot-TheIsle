@@ -20,7 +20,7 @@ LOCAL_LOG_FILE = os.path.join(LOCAL_LOG_DIR, "TheIsle-Shipping.log")
 LAST_PROCESSED_FILE = os.path.join(LOCAL_LOG_DIR, "last_processed_timestamp.txt")  # Stores last processed timestamp
 
 # Discord Configuration
-CHANNEL_ID = int(os.getenv("GET_LOG_CHANNEL_ID"))
+CHANNEL_ID = int(os.getenv("ADMIN_COMMAND_LOGS"))
 
 # Regex for extracting command details and timestamps
 COMMAND_PATTERN = re.compile(r"\[(\d{4}\.\d{2}\.\d{2}-\d{2}\.\d{2}\.\d{2})\]\[LogTheIsleCommandData\]: ([^\[]+) \[([0-9]{17})\] used command: (.+) at: (.+)")
