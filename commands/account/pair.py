@@ -11,7 +11,7 @@ from utils.discord.check_pairing_status import check_pairing_status
 
 load_dotenv()
 
-CHANNEL_ID = os.getenv('ADMIN_USER_PAIRING')
+CHANNEL_ID = os.getenv('USER_PAIRING_ATTEMPTS')
 
 def setup_pair_command(bot: commands.Bot):
     @bot.tree.command(name='pair', description='Link your Discord account with your SteamID.')
