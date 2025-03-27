@@ -39,7 +39,6 @@ def download_log():
             ftp.connect(FTP_HOST, FTP_PORT)
             ftp.login(FTP_USER, FTP_PASS)
 
-            # Download log file
             with open(LOCAL_LOG_FILE, "wb") as log_file:
                 ftp.retrbinary(f"RETR {FTP_LOG_PATH}", log_file.write)
             return True
@@ -76,7 +75,7 @@ def extract_target_player(command_details):
     """
     details_parts = command_details.split(", ")
     if details_parts:
-        return details_parts[0]  # The first part should be the target player's name
+        return details_parts[0]
     return "Unknown Player"
 
 async def process_new_logs(bot):
@@ -91,23 +90,44 @@ async def process_new_logs(bot):
                 command_match = COMMAND_PATTERN.search(line)
 
                 if command_match:
-                    timestamp = command_match.group(1).strip()
+                    # Original: 2025.03.27-20.29.22
+                    timestamp_raw = command_match.group(1).strip()
+                    try:
+                        date_part, time_part = timestamp_raw.split("-")
+                        year, month, day = date_part.split(".")
+                        hour, minute, _ = time_part.split(".")
+                        formatted_timestamp = f"[{hour}:{minute}-{month}.{day}.{year[-2:]}]"
+                    except Exception:
+                        formatted_timestamp = f"[{timestamp_raw}]"
+
                     admin_name = command_match.group(2).strip()
                     command = command_match.group(4).strip()
                     command_details = command_match.group(5).strip()
 
-                    # Ignore previously processed timestamps
-                    if timestamp <= last_timestamp:
+                    percent = ""
+                    new_value = re.search(r"New value: ([\d\.]+)%", command_details)
+
+                    if new_value:
+                        try:
+                            value = float(new_value.group(1))
+                            if value == 0:
+                                percent = ""
+                            elif value >= 1:
+                                percent = f":{str(int(value))[:3]}%"
+                            else:
+                                decimal_str = f"{value:.6f}".split(".")[1][:2]
+                                percent = f":.{decimal_str}%"
+                        except ValueError:
+                            percent = ""
+
+                    if timestamp_raw <= last_timestamp:
                         continue
 
-                    # Update last processed timestamp
-                    save_last_processed_timestamp(timestamp)
+                    save_last_processed_timestamp(timestamp_raw)
 
-                    # Extract target player
                     target_player = extract_target_player(command_details)
 
-                    discord_message = f"🛠️ **{admin_name}** used **{command}** on **{target_player}**"
-
+                    discord_message = f"**{formatted_timestamp}** {admin_name} USED **[{command.upper()}{percent}]** ON {target_player}"
                     await send_to_discord(bot, discord_message)
 
     except Exception as e:
@@ -123,5 +143,5 @@ async def get_command_logs(bot):
             await asyncio.sleep(5)
             continue
 
-        await process_new_logs(bot)  # Only process new commands
+        await process_new_logs(bot)
         await asyncio.sleep(1)
