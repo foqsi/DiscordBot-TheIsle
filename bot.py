@@ -49,6 +49,6 @@ setup_check_pair(bot)
 setup_clear_command(bot)
 setup_restarts_command(bot)
 setup_unlock_command(bot)
-# setup_rcon_command(bot)
+setup_rcon_command(bot)
 
 bot.run(os.getenv('DISCORD_TOKEN'))

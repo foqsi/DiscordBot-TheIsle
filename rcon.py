@@ -54,7 +54,7 @@ class RconClient:
 
         try:
             self.socket.connect((self.host, self.port))
-            print(f"✅ Connected to RCON server")
+            # print(f"✅ Connected to RCON server")
             return self.authorize()
         except (socket.error, TimeoutError) as e:
             print(f"❌ Connection failed: {e}. Retrying in 30 seconds...")
@@ -90,7 +90,7 @@ class RconClient:
         if self.socket:
             try:
                 self.socket.close()
-                print("🔴 Disconnected from RCON server.")
+                # print("🔴 Disconnected from RCON server.")
             except socket.error as e:
                 print(f"⚠️ Error disconnecting: {e}")
             finally:

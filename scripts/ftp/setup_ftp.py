@@ -23,7 +23,7 @@ def setup_ftp():
         print(f"❌ FTP Connection Error: {e}")
         return None
 
-def ftp_download_file(local_dir="logs"):
+def ftp_download_file(file_name, local_dir="logs"):
     """Downloads the log file from the FTP server to a local directory."""
     ftp = setup_ftp()
     if not ftp:
@@ -31,7 +31,7 @@ def ftp_download_file(local_dir="logs"):
 
     try:
         os.makedirs(local_dir, exist_ok=True)
-        local_file_path = os.path.join(local_dir, "TheIsle-Shipping.log")
+        local_file_path = os.path.join(local_dir, file_name)
 
         with open(local_file_path, "wb") as file:
             ftp.retrbinary(f"RETR {FTP_LOG_PATH}", file.write)
