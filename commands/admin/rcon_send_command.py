@@ -37,7 +37,6 @@ def setup_rcon_command(bot: commands.Bot):
         if rcon_client.connect():
             # Send the RCON command with or without a message
             response = rcon_client.send_command(command, command_data=message or "")
-            rcon_client.disconnect()
 
             await send_ephemeral_message(
                 interaction,

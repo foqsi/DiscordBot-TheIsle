@@ -48,6 +48,7 @@ last_dino_state = {}
 async def get_dino_population():
     """Fetch live player data from RCON and count dino species, excluding dead players."""
     if not RCON_CLIENT.connect():
+        print("❌ Unabled to get dino population: RCON connection failed.")
         return {}
 
     #  Get **actual logged-in players**
@@ -56,7 +57,6 @@ async def get_dino_population():
 
     #  Get full player details
     response = RCON_CLIENT.send_command("getplayerdata")
-    RCON_CLIENT.disconnect()
 
     if not response or "No response received" in response:
         return {}
@@ -101,9 +101,8 @@ async def update_dino_roster(bot):
 
             #  Apply changes via RCON
             roster_string = ",".join(enabled_dinos)
-            if RCON_CLIENT.connect():
-                RCON_CLIENT.send_command("updateplayables", roster_string)
-                RCON_CLIENT.disconnect()
+
+            RCON_CLIENT.send_command("updateplayables", roster_string)
 
             #  Detect changes and notify Discord (ONLY for changed dinos)
             await notify_dino_changes(bot, dino_population)
@@ -165,7 +164,7 @@ async def unlock_dino_for_temp(bot, dino_name, user):
 
     if RCON_CLIENT.connect():
         RCON_CLIENT.send_command("updateplayables", roster_string)
-        RCON_CLIENT.disconnect()
+        print(f"🔹 Temporarily unlocked {dino_name} for {user}.")
 
     #  Wait for 2 minutes, then disable the dino
     await asyncio.sleep(120)
