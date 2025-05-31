@@ -4,6 +4,19 @@ A Discord bot designed for **The Isle Evrima** servers, leveraging in-game log m
 
 ---
 
+## ⚠️ Project Status
+
+🚫 **This project is no longer under active development.**  
+I’ve decided to stop working on it. While the code and commands remain available for reference, no further updates, maintenance, or support are planned.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
 ## 🚀 Features
 
 🔹 **Log Monitoring**  
