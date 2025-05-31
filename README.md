@@ -46,7 +46,4 @@ The bot supports the following slash commands:
 > **Note:** A full setup guide will be provided in a future release.
 
 1. Clone the repository.
-2. Configure your bot token and RCON credentials in the environment variables or config file.
-3. Start the bot:
-   ```bash
-   npm start
+2. Configure your bot token and RCON credentials in the environment variables.
