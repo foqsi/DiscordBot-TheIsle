@@ -60,3 +60,10 @@ The bot supports the following slash commands:
 
 1. Clone the repository.
 2. Configure your bot token and RCON credentials in the environment variables.
+
+---
+
+## View a Quick Demo
+
+[![Watch the video](https://img.youtube.com/vi/IlFK1nlhWuI/hqdefault.jpg)](https://www.youtube.com/watch?v=IlFK1nlhWuI)
+
