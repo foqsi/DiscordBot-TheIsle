@@ -1,4 +1,4 @@
-# The Isle Evrima Discord Bot (Previously Foxy Dino)
+# The Isle Evrima Discord Bot (Fossil Logs)
 
 A Discord bot designed for **The Isle Evrima** servers, leveraging in-game log monitoring to create an interactive experience for players and server administrators.
 
